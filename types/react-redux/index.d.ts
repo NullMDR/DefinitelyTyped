@@ -12,6 +12,7 @@
 //                 Johann Rakotoharisoa <https://github.com/jrakotoharisoa>
 //                 Anatoli Papirovski <https://github.com/apapirovski>
 //                 Boris Sergeyev <https://github.com/surgeboris>
+//                 Phoenix He <https://github.com/nullmdr>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.8
 
@@ -113,8 +114,8 @@ export type InferableComponentEnhancer<TInjectedProps> =
     InferableComponentEnhancerWithProps<TInjectedProps, {}>;
 
 export type HandleThunkActionCreator<TActionCreator> =
-    TActionCreator extends (...args: any[]) => (...args: any[]) => any
-        ? ReturnType<TActionCreator>
+    TActionCreator extends (...args: infer TArgs) => (...args: any[]) => infer R
+        ? (...args: TArgs) => R
         : TActionCreator;
 
 // redux-thunk middleware returns thunk's return value from dispatch call
